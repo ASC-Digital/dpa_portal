@@ -1,0 +1,74 @@
+{
+  "name": "etm",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@hookform/resolvers": "^2.9.7",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
+    "bowser": "^2.11.0",
+    "crypto-js": "^4.1.1",
+    "date-fns": "^2.30.0",
+    "filepond": "^4.30.4",
+    "filepond-plugin-file-encode": "^2.1.11",
+    "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
+    "powerbi-client-react": "^1.3.5",
+    "react": "^18.2.0",
+    "react-bootstrap-pagination-control": "^1.0.5",
+    "react-csv": "^2.2.2",
+    "react-data-table-component": "^7.5.2",
+    "react-device-detect": "^2.2.2",
+    "react-dom": "^18.2.0",
+    "react-filepond": "^7.1.2",
+    "react-fullscreen-loading": "^0.0.4",
+    "react-google-charts": "^4.0.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-number-format": "^4.9.3",
+    "react-paginate": "^8.2.0",
+    "react-player": "^2.13.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.4.0",
+    "react-slick": "^0.29.0",
+    "react-toggle": "^4.1.3",
+    "slick-carousel": "^1.8.1",
+    "ss-search": "^1.6.1",
+    "toastr": "^2.1.4",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-app-rewired start --env.local",
+    "build:homol": "env-cmd -f ./.env.local react-app-rewired build",
+    "build": "env-cmd -f ./.env.production react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "env-cmd": "^10.1.0",
+    "git-commit-msg-linter": "^4.1.3",
+    "react-app-rewired": "^2.2.1"
+  }
+}

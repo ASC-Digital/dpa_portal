@@ -1,0 +1,10 @@
+.hoverBtn:hover {
+  background-color: #f0f0f4;
+  transition: 0.4s;
+}
+
+.hoverBtn {
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 15px;
+}

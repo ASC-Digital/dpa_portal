@@ -1,0 +1,31 @@
+body,
+html {
+  overflow-x: hidden;
+}
+
+.external-nav-link {
+  transition: transform 0.4s;
+}
+
+.external-nav-link:hover {
+  transform: scale(1.1);
+  /* border-bottom: 1px solid #fff; */
+}
+
+.external-nav-item.active {
+  /* border-bottom: 1px solid #fff; */
+}
+
+.navbar-home {
+  padding: 10px 1rem;
+}
+
+@media (max-width: 768px) {
+  .navbar-home {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-profile {
+    display: none;
+  }
+}

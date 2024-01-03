@@ -1,0 +1,11 @@
+{
+  "routes": [],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "build": {
+    "postBuild": {
+      "command": "npx update-browserslist-db@latest"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  app:
+    container_name: dpa-workspace-backend
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    depends_on:
+      - db
+    working_dir: /home/app/nodejs
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/home/app/nodejs
+
+  db:
+    image: mysql:5.7
+    container_name: dpa-workspace-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/dump:/docker-entrypoint-initdb.d

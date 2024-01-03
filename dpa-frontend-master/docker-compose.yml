@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  app:
+    container_name: etm-portal-de-premios-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+      - SKIP_PREFLIGHT_CHECK=true
+      - REACT_APP_URL_BACKEND=http://portal-de-premios-backend.dbb3anfphpasedau.eastus.azurecontainer.io:3000
+      - REACT_APP_API_KEY=adcc9db5fd6528f02bdbbf498750bcc5
+      - REACT_APP_API_NAME=X-CW-AK
+      - REACT_APP_API_KEY_VALUE=Key YWRtaW46YWRtaW4=

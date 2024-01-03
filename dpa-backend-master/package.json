@@ -1,0 +1,39 @@
+{
+  "name": "nestle-portal-de-premios-backend",
+  "version": "0.1.0",
+  "description": "Esse projeto é responsável pelas APIs para servir ao FrontEnd do projeto Portal de Prêmios Nestle.",
+  "main": "app/run.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "repository": "",
+  "author": "COD IT Services",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@azure/storage-blob": "^12.11.0",
+    "@sendgrid/mail": "^7.7.0",
+    "axios": "^1.2.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "into-stream": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.40",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.21.3",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.18"
+  }
+}

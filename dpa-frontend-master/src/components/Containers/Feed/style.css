@@ -1,0 +1,23 @@
+.shadowAdded {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.bottomShadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.showAttachmentsDiv {
+  overflow-y: auto;
+  max-height: 30vh;
+  overflow-x: hidden;
+}
+
+.showCommentsDiv {
+  overflow-y: scroll;
+  max-height: 26vh;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+}
+
+.hideOverflowX {
+  overflow-x: hidden;
+}
