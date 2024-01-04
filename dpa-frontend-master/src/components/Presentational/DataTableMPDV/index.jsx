@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { search } from "ss-search";
 import DataTable from "react-data-table-component";
-import Card from "@/components/Presentational/Card";
+import CardMPDV from "@/components/Presentational/CardMPDV";
 import Button from "@/components/Presentational/Buttons/Icon";
 import Circle from "@/components/Presentational/Buttons/Circle";
 import Upload from "@/components/Presentational/Buttons/Upload";
-import Export from "@/components/Presentational/Buttons/Export";
+import ExportMPDV from "@/components/Presentational/Buttons/ExportMPDV";
 import Spinner from "@/components/Presentational/Spinner";
 import Search from "@/components/Presentational/Inputs/Search";
 import Toggle from "@/components/Presentational/Toogle";
@@ -13,6 +13,7 @@ import { PAGINATION, MESSAGES, STYLE } from "./constants";
 
 const DatatableMPDV = ({
   data,
+  dataDigital,
   columns,
   loader,
   paginationTotalRows,
@@ -36,18 +37,21 @@ const DatatableMPDV = ({
   onClickPurchase,
   onClickDetails,
   filters,
+  filtersDigital,
   exports,
   onDownload,
   buttonDownload,
 }) => {
   let title = "";
   let buttonRight = "";
+  let buttonRight2 = "";
 
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
   const [filterTextDigital, setFilterTextDigital] = useState("");
   const [resetPaginationToggleDigital, setResetPaginationToggleDigital] = useState(false);
   const filteredItems = search(data, filters, filterText);
+  const filteredItemsDigital = search(dataDigital, filtersDigital, filterTextDigital);
 
   const subHeaderComponentMemo = useMemo(() => {
     const handleClear = () => {
@@ -56,9 +60,8 @@ const DatatableMPDV = ({
         setFilterText("");
       }
     };
-
+    console.warn("filterText", filterText);
     return ([
-      <h1 class="h3 mb-0 text-gray-800">MPDV Físico</h1>,
       <Search
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
@@ -70,14 +73,13 @@ const DatatableMPDV = ({
 
   const subHeaderComponentMemoDigital = useMemo(() => {
     const handleClear = () => {
-      if (filterText) {
+      if (filterTextDigital) {
         setResetPaginationToggleDigital(!resetPaginationToggleDigital);
         setFilterTextDigital("");
       }
     };
-
+    console.warn("filterTextDigital", filterTextDigital);
     return ([
-      <h1 class="h3 mb-0 text-gray-800">MPDV Digital</h1>,
       <Search
         value={filterTextDigital}
         onChange={(e) => setFilterTextDigital(e.target.value)}
@@ -145,12 +147,19 @@ const DatatableMPDV = ({
       />
     );
   }
-
+  
   if (buttonExport) {
+    //const allItems = filteredItems.concat(filteredItemsDigital);
+  
     buttonRight = (
-      <Export title="Exportar" data={filteredItems} headers={exports} />
+      <ExportMPDV title="Exportar Físicos" data={filteredItems} headers={exports} />
+    );
+    
+    buttonRight2 = (
+      <ExportMPDV title="Exportar Digitais" data={filteredItemsDigital} headers={exports} />
     );
   }
+  
 
   const getColumns = (rowsColumns) => {
     const data = [];
@@ -199,7 +208,9 @@ const DatatableMPDV = ({
   };
 
   return (
-    <Card title={title} buttonRight={buttonRight}>
+    <CardMPDV title={title} buttonRight={buttonRight} buttonRight2={buttonRight2}>
+      <h1 class="h3 mb-0 text-gray-800">MPDV Físico</h1>
+
       <DataTable
         defaultSortAsc={true}
         data={filteredItems}
@@ -219,11 +230,13 @@ const DatatableMPDV = ({
         paginationTotalRows={paginationTotalRows}
         onChangePage={onChangePage}
         onChangeRowsPerPage={onChangeRowsPerPage}
-      />,
+      />
+      
+      <h1 class="h3 mb-0 text-gray-800">MPDV Digital</h1>
       
       <DataTable
         defaultSortAsc={true}
-        data={filteredItems}
+        data={filteredItemsDigital}
         columns={getColumns(columns)}
         pagination={true}
         paginationComponentOptions={PAGINATION}
@@ -232,7 +245,7 @@ const DatatableMPDV = ({
         progressComponent={<Spinner />}
         expandableRows={false}
         noDataComponent={MESSAGES.noData}
-        paginationResetDefaultPage={resetPaginationToggle}
+        paginationResetDefaultPage={resetPaginationToggleDigital}
         subHeader
         subHeaderComponent={subHeaderComponentMemoDigital}
         persistTableHead
@@ -241,7 +254,7 @@ const DatatableMPDV = ({
         onChangePage={onChangePage}
         onChangeRowsPerPage={onChangeRowsPerPage}
       />
-    </Card>
+    </CardMPDV>
   );
 };
 

@@ -10,6 +10,8 @@ router.route("/active/:key").put(action.active).patch(action.active);
 
 router.route("/disable/:key").delete(action.disable);
 
+router.route("/digital").get(action.listDigitalAdvertisingMaterial);  // Nova rota
+
 router
   .route("/:key")
   .get(action.get)

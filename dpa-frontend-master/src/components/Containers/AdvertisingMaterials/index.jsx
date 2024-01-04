@@ -40,7 +40,6 @@ const AdvertisingMaterials = () => {
   const [modal, setModal] = useState(false);
   const [modalAlert, setModalAlert] = useState(false);
   const [formData, setFormData] = useState(FORM_DATA);
-  const [formDataDigital, setFormDataDigital] = useState(FORM_DATA);
   const [data, setData] = useState([]);
   const [dataDigital, setDataDigital] = useState([]);
   const [type, setType] = useState(TYPE);
@@ -114,8 +113,16 @@ const AdvertisingMaterials = () => {
   const listData = async () => {
     const response = await getAdvertisingMaterial();
 
+    const nonDigitalMaterials = response?.advertisingMaterial?.filter(
+      (item) => item?.digitalMPDV !== true
+    );
+
+    const digitalMaterials = response?.advertisingMaterial?.filter(
+      (item) => item?.digitalMPDV === true
+    );
+
     setData(
-      response?.advertisingMaterial?.map((item) => ({
+      nonDigitalMaterials?.map((item) => ({
         ...item,
         status: item?.deletedAt ? "Inativo" : "Ativo",
         downloadedBy: item?.downloadedAdvertisingMaterials
@@ -123,24 +130,21 @@ const AdvertisingMaterials = () => {
           ?.join(", "),
       }))
     );
+
     setDataDigital(
-      response?.advertisingMaterial?.((item) => ({
-        ...item
+      digitalMaterials?.map((item) => ({
+        ...item,
+        status: item?.deletedAt ? "Inativo" : "Ativo",
+        downloadedBy: item?.downloadedAdvertisingMaterials
+          ?.map((u) => u?.user?.name)
+          ?.join(", "),
       }))
     );
-    console.warn('data', dataDigital);
+
     setSpinner(false);
     setModal(false);
   };
-/*
-  TENTANDO FILTRAR O dataDigital PARA ENVIAR PARA A LISTA.
 
-  const filterMPDV = async () => {
-    dataDigital.forEach(d => {
-      if (d.)
-    })
-  }
-*/
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -181,9 +185,11 @@ const AdvertisingMaterials = () => {
       ) : (
         <DatatableMPDV
           data={data}
+          dataDigital={dataDigital}
           columns={COLUMNS}
           loader={spinner}
           filters={FILTERS}
+          filtersDigital={FILTERS}
           exports={EXPORTS}
           buttonAdd={[1, 2].includes(roleId)}
           buttonEdit={[1, 2].includes(roleId)}

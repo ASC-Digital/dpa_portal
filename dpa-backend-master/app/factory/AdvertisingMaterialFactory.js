@@ -11,15 +11,43 @@ class AdvertisingMaterialFactory extends CrudFactory {
       include: [
         {
           model: DownloadedAdvertisingMaterials,
-          
           include: [
             {
-              model: Users, 
+              model: Users,
             },
           ],
         },
       ],
     };
+  }
+
+  async readDigitalAdvertisingMaterial(showDisabled, filters, filterDistributors) {
+    const whereClause = {
+      isDigital: true, // Filtro para materiais digitais
+    };
+
+    if (!showDisabled) {
+      whereClause.deletedAt = null; // Não mostrar itens deletados
+    }
+
+    if (filterDistributors) {
+      whereClause[Op.and] = [
+        // Adicione outros filtros conforme necessário
+        // Exemplo: { distributorId: filterDistributors },
+      ];
+    }
+
+    try {
+      const result = await this.entity.findAndCountAll({
+        where: whereClause,
+        ...this.defaultOptions,
+        ...filters,
+      });
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

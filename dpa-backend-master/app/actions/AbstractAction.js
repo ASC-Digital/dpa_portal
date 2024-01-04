@@ -367,6 +367,48 @@ class AbstractAction {
     );
     return OK(res, { data });
   }
+
+  static async readDigitalAdvertisingMaterial(req, res, factory) {
+    const showDisabled = req.showDisabled === true;
+    const filterDistributors = req.onlyDistributors;
+    const filters = req.query;
+
+    try {
+        const entity = await factory.readDigitalAdvertisingMaterial(
+            showDisabled,
+            filters,
+            filterDistributors
+        );
+
+        if ("errors" in entity) {
+            return BadRequest(res, {
+                message: "Failure to read digital advertising material",
+                errors: [entity.errors],
+            });
+        }
+
+        const content = {};
+        if ("count" in entity) {
+            content.page = Number(filters.page);
+            content.per_page = Number(filters.limit);
+            content.total = entity.count;
+            content.total_pages = Math.ceil(entity.count / filters.limit);
+            content.data = entity.rows;
+        } else {
+            content.data = entity;
+        }
+
+        return OK(res, content);
+    } catch (error) {
+        const errorMessage = error.original
+            ? error.original.message
+            : error.message;
+        return InternalServerError(res, {
+            message: "Failure to read digital advertising material",
+            errors: [errorMessage],
+        });
+    }
+  }
 }
 
 module.exports = AbstractAction;

@@ -30,6 +30,10 @@ class CommentsActions {
   static async disable(req, res) {
     await absAction.disable(req, res, factory);
   }
+
+  static async listDigitalAdvertisingMaterial(req, res) {
+    await absAction.readDigitalAdvertisingMaterial(req, res, factory);
+  }
 }
 
 module.exports = CommentsActions;

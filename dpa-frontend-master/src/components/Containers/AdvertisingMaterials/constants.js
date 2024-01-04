@@ -48,10 +48,6 @@ export const COLUMNS = [
     selector: (row) => row.typeOfMpdv,
   },
   {
-    name: "MPDV Digital",
-    selector: (row) => <div>{row?.digitalMPDV === true ? [<div>SIM</div>] : [<div>NÃO</div>]}</div>,
-  },
-  {
     name: "Descrição do arquivo",
     selector: (row) => <div>{row?.description}</div>,
   },
@@ -73,7 +69,7 @@ export const EXPORTS = [
   { label: "Link", key: "link" },
   { label: "Status", key: "status" },
   { label: "Baixado por", key: "downloadedBy" },
-  { label: "Criado em", key: "createdAt" },
+  { label: "Baixado em", key: "createdAt" },
 ];
 
 export const FILTERS = [

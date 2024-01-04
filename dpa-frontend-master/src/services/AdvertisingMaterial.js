@@ -21,6 +21,26 @@ export async function getAdvertisingMaterial(queryString) {
   };
 }
 
+// Get advertisingMaterial digital
+export async function getDigitalAdvertisingMaterial(queryString) {
+  const response = await request({
+    endpoint: `/api/advertisingMaterial/digital`,
+    method: "GET",
+  });
+
+  if (!response.status) {
+    console.log("[get-advertising-material-error]: ", response.message);
+    return { status: false, message: translateMessage(response.message) };
+  }
+
+  console.log("[get-advertising-material-success]: ", response.data.data);
+
+  return {
+    status: true,
+    advertisingMaterial: response.data.data,
+  };
+}
+
 // Send advertisingMaterial
 export async function sendAdvertisingMaterial(body) {
   const response = await request({
@@ -117,6 +137,7 @@ export async function activeAdvertisingMaterial(id) {
     status: true,
   };
 }
+
 // Active DownloadedAdvertisingMaterial
 export async function registerDownload(body) {
   const response = await request({
